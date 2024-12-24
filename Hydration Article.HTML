@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthConnect | Hydration Benefits</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: url(Background\ splash.jpg) no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #6f42c1;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+        .menu-toggle {
+            display: none;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: white;
+            margin: 0;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            position: relative;
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #170d72;
+        }
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        nav ul ul li {
+            margin: 0;
+        }
+        nav ul ul a {
+            color: #0073e6;
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+        }
+        nav ul ul a:hover {
+            background-color: #f0f0f0;
+        }
+        nav li:hover > ul {
+            display: block;
+        }
+
+        .hydration-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #b8c1db, #babfc4);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hydration-container h2 {
+            color: #062385;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hydration-container p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 15px 0;
+        }
+
+        .hydration-container img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.7s ease-in-out;
+        }
+
+        .tips {
+            background-color: #a2add3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tips h3 {
+            color: #130b8a;
+            margin-bottom: 15px;
+        }
+
+        .tips ul {
+            padding-left: 20px;
+        }
+
+        .tips ul li {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .cta-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .cta-section a {
+            background: #0277bd;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .cta-section a:hover {
+            background: #01579b;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+            header .logo {
+                width: 100%;
+            }
+            header h1 {
+                font-size: 20px;
+            }
+            nav ul {
+                flex-direction: column;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                background: rgba(0, 0, 0, 0.8);
+                width: 100%;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+                display: none;
+                transition: all 0.3s;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav li {
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                color: white;
+                font-size: 24px;
+            }
+        }
+
+        footer {
+            background-color: #160f41;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            margin: 0 10px;
+            color: white;
+        }
+
+        /* Back-to-Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #9050ad;
+            padding: 10px 15px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #4b1ad1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Healthconnect logo.png" alt="HealthConnect Logo">
+            <h1>HealthConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Health Consultation.HTML">Home</a></li>
+                <li>
+                    <a href="AboutUs.html">About Us</a>
+                    <ul>
+                        <li><a href="AboutUs.html">Our Mission, Values & Goals</a></li>
+                        <li><a href="AboutUs.html">Meet Our Team</a></li>
+                        <li><a href="AboutUs.html">Our Journey</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Services.HTML">Services</a>
+                    <ul>
+                        <li><a href="Services.HTML">Telemedicine</a></li>
+                        <li><a href="Services.HTML">Mental Health</a></li>
+                        <li><a href="Services.HTML">Wellness Programs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Articles.HTML">Articles</a>
+                    <ul>
+                        <li><a href="Detailed Article.HTML">Healthy Eating on a Budget</a></li>
+                        <li><a href="Exercise Article.HTML">Benefits of Morning Exercise</a></li>
+                        <li><a href="Hydration Article.HTML">Hydration: The Key to Well-Being</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Specialist.html">Find a Specialist</a>
+                </li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <div class="hydration-container">
+        <h2>Hydration: The Key to Well-Being</h2>
+        <p>
+            In our fast-paced lives, we often forget the simplest things that matter the most. One such fundamental yet frequently overlooked aspect of well-being is hydration. It is not just about quenching your thirst; staying hydrated plays a vital role in maintaining our physical health, mental clarity, and overall energy levels. Let’s explore why hydration is the cornerstone of a healthy lifestyle and how you can make it a consistent habit.
+        </p>
+
+        <img src="Stay Hydrated.jpg" alt="Hydration Benefits">
+
+        <h3>Why is Hydration Important?</h3>
+        <p>
+            Water is the essence of life. It makes up about 60% of our body and is crucial for various bodily functions. Here’s how staying hydrated impacts your well-being:
+        </p>
+        <ul>
+            <li><strong>Boosts Physical Health:</strong> Regulates body temperature, supports joint health, and aids digestion.</li>
+            <li><strong>Enhances Mental Clarity:</strong> Dehydration as mild as 1-2% of your body weight can impair cognitive performance, while proper hydration keeps your mind sharp.</li>
+            <li><strong>Improves Skin Health:</strong> Hydration helps flush out toxins and keeps your skin radiant.</li>
+        </ul>
+
+        <img src="Hydration tips.jpg" alt="Healthy Hydration Tips" style="margin-top: 20px;">
+
+        <h3>Signs of Dehydration</h3>
+        <p>
+            Despite its importance, many people underestimate their water intake. Watch out for these common signs:
+        </p>
+        <ul>
+            <li>Dry mouth and lips</li>
+            <li>Fatigue or dizziness</li>
+            <li>Dark yellow urine</li>
+            <li>Dry skin</li>
+            <li>Headaches or difficulty concentrating</li>
+        </ul>
+
+        <div class="tips">
+            <h3>Hydration Tips:</h3>
+            <ul>
+                <li>Start your day with a glass of water to kickstart your metabolism.</li>
+                <li>Carry a water bottle everywhere you go as a constant reminder.</li>
+                <li>Add a slice of lemon or cucumber for a refreshing twist.</li>
+                <li>Set hydration reminders on your phone to build the habit.</li>
+                <li>Replace sugary drinks with herbal teas or infused water.</li>
+            </ul>
+        </div>
+
+        <p>
+            By making hydration a daily priority, you can enhance your energy levels, improve skin health, and support overall bodily functions.
+        </p>
+
+        <div class="cta-section">
+            <a href="Articles.html">Back to Articles</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 HealthConnect. All rights reserved.</p>
+        <p><a href="Privacy Policy.html">Privacy Policy</a> | <a href="Terms of service.html">Terms of Service</a></p>
+    </footer>
+
+    <!-- Back-to-Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Toggle navigation menu (mobile)
+        function toggleMenu() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('active');
+        }
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+         window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

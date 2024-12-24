@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Specialist | HealthConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+            background: #f5f5f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background-color: #6f42c1;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: white;
+            margin: 0;
+        }
+        .menu-toggle {
+            display: none;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            position: relative;
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #170d72;
+        }
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        nav ul ul li {
+            margin: 0;
+        }
+        nav ul ul a {
+            color: #0073e6;
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+        }
+        nav ul ul a:hover {
+            background-color: #f0f0f0;
+        }
+        nav li:hover > ul {
+            display: block;
+        }
+
+        .search-container {
+            margin: 20px auto;
+            max-width: 900px;
+            text-align: center;
+        }
+        .search-container input, .search-container select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            background-color: #425d97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .search-container button:hover {
+            background-color: #001589;
+        }
+        .specialist-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .specialist-card {
+            background: rgb(175, 103, 235);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .specialist-card:hover {
+            transform: scale(1.05);
+        }
+        .specialist-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .specialist-card h3 {
+            margin: 10px 0;
+            color: #160f41;
+        }
+        .specialist-card p {
+            color: #000000;
+            margin: 5px 10px;
+        }
+        .specialist-card .rating {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .specialist-card .rating span {
+            font-size: 18px;
+            color: #FFD700;
+        }
+        .book-now {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            display: inline-block;
+            margin: 10px 0;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .book-now:hover {
+            background-color: #c2185b;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 20px;
+            }
+            header .logo {
+                width: 100%;
+            }
+            header h1 {
+                font-size: 20px;
+            }
+            nav ul {
+                flex-direction: column;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                background: rgba(0, 0, 0, 0.8);
+                width: 100%;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+                display: none;
+                transition: all 0.3s;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav li {
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                color: white;
+                font-size: 24px;
+            }
+            .search-container input,
+            .search-container select {
+                width: 90%;
+                margin: 10px auto;
+            }
+            .search-container button {
+                width: 90%;
+            }
+            .specialist-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .specialist-card {
+                width: 90%;
+            }
+            .specialist-card img {
+                height: auto;
+            }
+            .modal {
+                width: 90%;
+                padding: 15px;
+            }
+            footer {
+                padding: 20px;
+            }
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1001;
+        }
+        .modal.active {
+            display: block;
+        }
+        .modal .close {
+            float: right;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #160f41;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            margin: 0 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Healthconnect logo.png" alt="HealthConnect Logo">
+            <h1>HealthConnect</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Health Consultation.HTML">Home</a></li>
+                <li>
+                    <a href="AboutUs.html">About Us</a>
+                    <ul>
+                        <li><a href="AboutUs.html">Our Mission, Values & Goals</a></li>
+                        <li><a href="AboutUs.html">Meet Our Team</a></li>
+                        <li><a href="AboutUs.html">Our Journey</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Services.HTML">Services</a>
+                    <ul>
+                        <li><a href="Services.HTML">Telemedicine</a></li>
+                        <li><a href="Services.HTML">Mental Health</a></li>
+                        <li><a href="Services.HTML">Wellness Programs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Articles.HTML">Articles</a>
+                    <ul>
+                        <li><a href="Detailed Article.HTML">Healthy Eating on a Budget</a></li>
+                        <li><a href="Exercise Article.HTML">Benefits of Morning Exercise</a></li>
+                        <li><a href="Hydration Article.HTML">Hydration: The Key to Well-Being</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Specialist.html">Find a Specialist</a>
+                </li>
+                <li><a href="contactus.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" placeholder="Search by Name" id="searchName">
+        <select id="searchSpecialty">
+            <option value="">Specialty</option>
+            <option value="general">General Practitioner</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+            <option value="wellness">Wellness Specialist</option>
+        </select>
+        <select id="searchLocation">
+            <option value="">Location</option>
+            <option value="city1">Melbourne</option>
+            <option value="city2">Dubai</option>
+            <option value="city3">New York</option>
+        </select>
+        <select id="searchAvailability">
+            <option value="">Availability</option>
+            <option value="today">Today</option>
+            <option value="thisWeek">This Week</option>
+            <option value="nextWeek">Next Week</option>
+        </select>
+        <button onclick="filterSpecialists()">Search</button>
+    </div>
+
+    <div class="specialist-list" id="specialistList">
+        <!-- Dynamic specialist cards will go here -->
+        <div class="specialist-card fade-in">
+            <img src="Sarah.PNG" alt="Dr. Sarah Schenck">
+            <h3>Dr. Sarah Schenck</h3>
+            <p class="specialty" data-specialty="general">General Practitioner</p>
+            <p>Experience: 8 years</p>
+            <p class="location" data-location="city1">Location: Melbourne</p>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+            <a href="#" class="book-now">Book Now</a>
+        </div>
+
+        <div class="specialist-card fade-in">
+            <img src="Wellness Specialist.PNG" alt="Dr. Eduardo Fernandez">
+            <h3>Dr. Eduardo Fernandez</h3>
+            <p class="specialty" data-specialty="wellness">Wellness Specialist</p>
+            <p>Experience: 10 years</p>
+            <p class="location" data-location="city2">Location: Dubai</p>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+            <a href="#" class="book-now">Book Now</a>
+        </div>
+
+        <div class="specialist-card fade-in">
+            <img src="Ceylan Sengul.PNG" alt="Dr. Ceylan Sengul">
+            <h3>Dr. Ceylan Sengul</h3>
+            <p class="specialty" data-specialty="Psychiatrist">Psychiatrist</p>
+            <p>Experience: 9 years</p>
+            <p class="location" data-location="city3">Location: New York</p>
+            <div class="rating">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <a href="#" class="book-now">Book Now</a>
+        </div>
+    </div>
+
+    <div id="appointmentModal" class="modal">
+        <span class="close" onclick="toggleModal()">×</span>
+        <h2>Choose Appointment Type</h2>
+        <p>Please select your appointment type:</p>
+        <button onclick="toggleModal('Online Consultation')">Online Consultation</button>
+        <button onclick="toggleModal('Physical Appointment')">Physical Appointment</button>
+    </div>
+    <div id="modalOverlay" class="overlay" onclick="toggleModal()"></div>
+
+    <footer>
+        <p>&copy; 2024 HealthConnect. All rights reserved.</p>
+        <p><a href="Privacy Policy.html">Privacy Policy</a> | <a href="Terms of service.html">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Toggle navigation menu (mobile)
+        function toggleMenu() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('active');
+        }
+
+        function filterSpecialists() {
+            const name = document.getElementById("searchName").value.toLowerCase();
+            const specialty = document.getElementById("searchSpecialty").value;
+            const location = document.getElementById("searchLocation").value;
+            const cards = document.querySelectorAll(".specialist-card");
+
+            cards.forEach(card => {
+                const cardName = card.querySelector("h3").textContent.toLowerCase();
+                const cardSpecialty = card.querySelector(".specialty").dataset.specialty;
+                const cardLocation = card.querySelector(".location").dataset.location;
+
+                if (
+                    (!name || cardName.includes(name)) &&
+                    (!specialty || cardSpecialty === specialty) &&
+                    (!location || cardLocation === location)
+            ) {
+                        card.style.display = "block";
+                        card.classList.add("fade-in");
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            }
+
+            function toggleModal(appointmentType = "") {
+                const modal = document.getElementById("appointmentModal");
+                const overlay = document.getElementById("modalOverlay");
+
+                if (appointmentType) {
+                    window.location.href = `booking.html?type=${encodeURIComponent(appointmentType)}`;
+                    return;
+                }
+
+                modal.classList.toggle("active");
+                overlay.classList.toggle("active");
+            }
+
+            document.querySelectorAll(".book-now").forEach(button => {
+                button.addEventListener("click", () => toggleModal());
+            });
+    </script>
+</body>
+</html>
